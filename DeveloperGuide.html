@@ -22,11 +22,12 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#module-implementation">3.1. Module Implementation</a></li>
-<li><a href="#student-implementation">3.2. Student Implementation</a></li>
-<li><a href="#timetable-implementation">3.3. Timetable Implementation</a></li>
-<li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
+<li><a href="#declaration-implementation">3.1. Declaration Implementation</a></li>
+<li><a href="#module-implementation">3.2. Module Implementation</a></li>
+<li><a href="#student-implementation">3.3. Student Implementation</a></li>
+<li><a href="#timetable-implementation">3.4. Timetable Implementation</a></li>
+<li><a href="#logging">3.5. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a></li>
@@ -337,9 +338,260 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="module-implementation"><a class="link" href="#module-implementation">3.1. Module Implementation</a></h3>
+<h3 id="declaration-implementation"><a class="link" href="#declaration-implementation">3.1. Declaration Implementation</a></h3>
 <div class="sect3">
-<h4 id="add-module"><a class="link" href="#add-module">3.1.1. Add Module</a></h4>
+<h4 id="declare-major"><a class="link" href="#declare-major">3.1.1. Declare Major</a></h4>
+<div class="paragraph">
+<p>The <code>declare major</code> command associates an existing <code>Major</code> entity (with all associated values) provided by the user.</p>
+</div>
+<div class="paragraph">
+<p>It is appended with the tag <code>MAJOR</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>Major</code> entities are automatically created and populated through the JSON data received from NUSMods.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h5>
+<div class="paragraph">
+<p><code>MajorSetCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>MajorSetCommand</code> is parsed using <code>MajorCommandParser</code> to split the user input into relevant fields.</p>
+</div>
+<div class="paragraph">
+<p>The following high-level sequence diagram illustrates the interactions between the <code>Ui</code>, <code>Logic</code> &amp; <code>Model</code> components when a module is being added.</p>
+</div>
+<div class="paragraph">
+<p>%DiagramToBeInserted%</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the <code>declare</code> mechanism behaves at each step:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command. <code>MajorCommandParser</code> will associate the specified <code>Major</code> object (if it exists).</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As of this time, <code>Student</code> entities can only be associated in a 1-1 relationship with a <code>Major</code> entity.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-how-code-majorsetcommand-code-executes"><a class="link" href="#aspect-how-code-majorsetcommand-code-executes">Aspect: How <code>MajorSetCommand</code> Executes</a></h6>
+
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="declare-minor"><a class="link" href="#declare-minor">3.1.2. Declare Minor</a></h4>
+<div class="paragraph">
+<p>The <code>declare minor</code> command associates an existing <code>Minor</code> entity (with all associated values) provided by the user.</p>
+</div>
+<div class="paragraph">
+<p>It is appended with the tag <code>MINOR</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>Minor</code> entities are automatically created and populated through the JSON data received from NUSMods.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h5>
+<div class="paragraph">
+<p><code>MinorSetCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>MinorSetCommand</code> is parsed using <code>MinorCommandParser</code> to split the user input into relevant fields.</p>
+</div>
+<div class="paragraph">
+<p>The following high-level sequence diagram illustrates the interactions between the <code>Ui</code>, <code>Logic</code> &amp; <code>Model</code> components when a module is being added.</p>
+</div>
+<div class="paragraph">
+<p>%DiagramToBeInserted%</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the <code>declare</code> mechanism behaves at each step:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command. <code>MinorCommandParser</code> will associate the specified <code>Minor</code> object (if it exists).</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As of this time, <code>Student</code> entities can only be associated in a 1-0..1 relationship with a <code>Minor</code> entity.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-how-code-minorsetcommand-code-executes"><a class="link" href="#aspect-how-code-minorsetcommand-code-executes">Aspect: How <code>MinorSetCommand</code> Executes</a></h6>
+
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="declare-track"><a class="link" href="#declare-track">3.1.3. Declare Track</a></h4>
+<div class="paragraph">
+<p>The <code>declare track</code> command associates an existing <code>Track</code> entity (with all associated values) provided by the user.</p>
+</div>
+<div class="paragraph">
+<p>It is appended with the tag <code>ACTION</code> and <code>TRACK</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>Track</code> entities are automatically created and populated through the JSON data received from NUSMods.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h5>
+<div class="paragraph">
+<p><code>TrackSetCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>TrackSetCommand</code> is parsed using <code>TrackCommandParser</code> to split the user input into relevant fields.</p>
+</div>
+<div class="paragraph">
+<p>The following high-level sequence diagram illustrates the interactions between the <code>Ui</code>, <code>Logic</code> &amp; <code>Model</code> components when a module is being added.</p>
+</div>
+<div class="paragraph">
+<p>%DiagramToBeInserted%</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the <code>declare</code> mechanism behaves at each step:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command. <code>TrackCommandParser</code> will associate the specified <code>Minor</code> object (if it exists).</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As of this time, <code>Student</code> entities can only be associated in a 1-0..1 relationship with a <code>Track</code> entity.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-how-code-tracksetcommand-code-executes"><a class="link" href="#aspect-how-code-tracksetcommand-code-executes">Aspect: How <code>TrackSetCommand</code> Executes</a></h6>
+
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="declare-specialisation"><a class="link" href="#declare-specialisation">3.1.4. Declare Specialisation</a></h4>
+<div class="paragraph">
+<p>The <code>declare spec</code> command associates an existing <code>Specialisation</code> entity (with all associated values) provided by the user.</p>
+</div>
+<div class="paragraph">
+<p>It is appended with the tag <code>ACTION</code> and <code>SPEC</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>Specialisation</code> entities are automatically created and populated through the JSON data received from NUSMods.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="current-implementation-4"><a class="link" href="#current-implementation-4">Current Implementation</a></h5>
+<div class="paragraph">
+<p><code>SpecialisationSetCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>SpecialisationSetCommand</code> is parsed using <code>SpecialisationCommandParser</code> to split the user input into relevant fields.</p>
+</div>
+<div class="paragraph">
+<p>The following high-level sequence diagram illustrates the interactions between the <code>Ui</code>, <code>Logic</code> &amp; <code>Model</code> components when a module is being added.</p>
+</div>
+<div class="paragraph">
+<p>%DiagramToBeInserted%</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the <code>declare</code> mechanism behaves at each step:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User enters the command. <code>SpecialisationCommandParser</code> will associate the specified <code>Specialisation</code> object (if it exists).</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As of this time, <code>Student</code> entities can only be associated in a 1-0..1 relationship with a <code>Specialisation</code> entity.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-how-code-specialisationsetcommand-code-executes"><a class="link" href="#aspect-how-code-specialisationsetcommand-code-executes">Aspect: How <code>SpecialisationSetCommand</code> Executes</a></h6>
+
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="module-implementation"><a class="link" href="#module-implementation">3.2. Module Implementation</a></h3>
+<div class="sect3">
+<h4 id="add-module"><a class="link" href="#add-module">3.2.1. Add Module</a></h4>
 <div class="paragraph">
 <p>The <code>module add</code> command associates an existing <code>Module</code> entity (with all associated values) provided by the user.</p>
 </div>
@@ -359,7 +611,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </table>
 </div>
 <div class="sect4">
-<h5 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h5>
+<h5 id="current-implementation-5"><a class="link" href="#current-implementation-5">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>ModuleAddCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>ModuleAddCommand</code> is parsed using <code>ModuleAddCommandParser</code> to split the user input into relevant fields.</p>
 </div>
@@ -381,7 +633,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h5>
+<h5 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-moduleaddcommand-code-executes"><a class="link" href="#aspect-how-code-moduleaddcommand-code-executes">Aspect: How <code>ModuleAddCommand</code> Executes</a></h6>
 
@@ -389,7 +641,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </div>
 </div>
 <div class="sect3">
-<h4 id="remove-module"><a class="link" href="#remove-module">3.1.2. Remove Module</a></h4>
+<h4 id="remove-module"><a class="link" href="#remove-module">3.2.2. Remove Module</a></h4>
 <div class="paragraph">
 <p>The <code>module remove</code> command disassociates a <code>Module</code> entity (with all associated values) when instructed by the user.</p>
 </div>
@@ -397,7 +649,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>It is appended with the tag <code>MODULE_CODE</code>.</p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h5>
+<h5 id="current-implementation-6"><a class="link" href="#current-implementation-6">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>ModuleRemoveCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>ModuleRemoveCommand</code> is parsed using <code>ModuleRemoveCommandParser</code> to parse the action.</p>
 </div>
@@ -419,7 +671,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h5>
+<h5 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-moduleremovecommand-code-executes"><a class="link" href="#aspect-how-code-moduleremovecommand-code-executes">Aspect: How <code>ModuleRemoveCommand</code> Executes</a></h6>
 
@@ -427,12 +679,12 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-modules"><a class="link" href="#list-modules">3.1.3. List Modules</a></h4>
+<h4 id="list-modules"><a class="link" href="#list-modules">3.2.3. List Modules</a></h4>
 <div class="paragraph">
 <p>The <code>module list</code> command lists all <code>Module</code> entities.</p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h5>
+<h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>ModuleListCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>ModuleListCommand</code> is parsed using <code>ModuleCommandParser</code> to get the command input.</p>
 </div>
@@ -466,7 +718,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h5>
+<h5 id="design-considerations-7"><a class="link" href="#design-considerations-7">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-modulelistcommand-code-executes"><a class="link" href="#aspect-how-code-modulelistcommand-code-executes">Aspect: How <code>ModuleListCommand</code> Executes</a></h6>
 
@@ -475,9 +727,9 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="student-implementation"><a class="link" href="#student-implementation">3.2. Student Implementation</a></h3>
+<h3 id="student-implementation"><a class="link" href="#student-implementation">3.3. Student Implementation</a></h3>
 <div class="sect3">
-<h4 id="add-student"><a class="link" href="#add-student">3.2.1. Add Student</a></h4>
+<h4 id="add-student"><a class="link" href="#add-student">3.3.1. Add Student</a></h4>
 <div class="paragraph">
 <p>The <code>student add</code> command creates a <code>Student</code> entity (with name and/or major) with the fields provided by the user.</p>
 </div>
@@ -501,7 +753,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </ul>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-4"><a class="link" href="#current-implementation-4">Current Implementation</a></h5>
+<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>StudentAddCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>StudentAddCommand</code> is parsed using <code>StudentAddCommandParser</code> to split the user input into relevant fields.</p>
 </div>
@@ -533,7 +785,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h5>
+<h5 id="design-considerations-8"><a class="link" href="#design-considerations-8">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-studentaddcommand-code-executes"><a class="link" href="#aspect-how-code-studentaddcommand-code-executes">Aspect: How <code>StudentAddCommand</code> Executes</a></h6>
 
@@ -541,7 +793,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="remove-student"><a class="link" href="#remove-student">3.2.2. Remove Student</a></h4>
+<h4 id="remove-student"><a class="link" href="#remove-student">3.3.2. Remove Student</a></h4>
 <div class="paragraph">
 <p>The <code>student remove</code> command destroys a <code>Student</code> entity (with all associated values) when instructed by the user.</p>
 </div>
@@ -549,7 +801,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 <p>It is appended with the tag <code>INDEX</code>.</p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-5"><a class="link" href="#current-implementation-5">Current Implementation</a></h5>
+<h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>StudentRemoveCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>StudentRemoveCommand</code> is parsed using <code>StudentRemoveCommandParser</code> to parse the action.</p>
 </div>
@@ -571,7 +823,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h5>
+<h5 id="design-considerations-9"><a class="link" href="#design-considerations-9">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-studentremovecommand-code-executes"><a class="link" href="#aspect-how-code-studentremovecommand-code-executes">Aspect: How <code>StudentRemoveCommand</code> Executes</a></h6>
 
@@ -579,7 +831,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="active-student"><a class="link" href="#active-student">3.2.3. Active Student</a></h4>
+<h4 id="active-student"><a class="link" href="#active-student">3.3.3. Active Student</a></h4>
 <div class="paragraph">
 <p>The <code>student active</code> command selects the specified <code>Student</code> entity with its associated values, by the index input provided by the user.</p>
 </div>
@@ -587,7 +839,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 <p>It is appended with the tag <code>INDEX</code>.</p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-6"><a class="link" href="#current-implementation-6">Current Implementation</a></h5>
+<h5 id="current-implementation-10"><a class="link" href="#current-implementation-10">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>StudentActiveCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>StudentActiveCommand</code> is parsed using <code>StudentActiveCommandParser</code> to split the user input into relevant fields.</p>
 </div>
@@ -609,7 +861,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h5>
+<h5 id="design-considerations-10"><a class="link" href="#design-considerations-10">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-studentactivecommand-code-executes"><a class="link" href="#aspect-how-code-studentactivecommand-code-executes">Aspect: How <code>StudentActiveCommand</code> Executes</a></h6>
 
@@ -617,12 +869,12 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-students"><a class="link" href="#list-students">3.2.4. List Students</a></h4>
+<h4 id="list-students"><a class="link" href="#list-students">3.3.4. List Students</a></h4>
 <div class="paragraph">
 <p>The <code>student list</code> command lists all <code>Student</code> entities.</p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
+<h5 id="current-implementation-11"><a class="link" href="#current-implementation-11">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>StudentListCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>StudentListCommand</code> is parsed using <code>StudentCommandParser</code> to get the command input.</p>
 </div>
@@ -644,7 +896,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-7"><a class="link" href="#design-considerations-7">Design Considerations</a></h5>
+<h5 id="design-considerations-11"><a class="link" href="#design-considerations-11">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-studentlistcommand-code-executes"><a class="link" href="#aspect-how-code-studentlistcommand-code-executes">Aspect: How <code>StudentListCommand</code> Executes</a></h6>
 
@@ -653,9 +905,9 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="timetable-implementation"><a class="link" href="#timetable-implementation">3.3. Timetable Implementation</a></h3>
+<h3 id="timetable-implementation"><a class="link" href="#timetable-implementation">3.4. Timetable Implementation</a></h3>
 <div class="sect3">
-<h4 id="add-timetable"><a class="link" href="#add-timetable">3.3.1. Add Timetable</a></h4>
+<h4 id="add-timetable"><a class="link" href="#add-timetable">3.4.1. Add Timetable</a></h4>
 <div class="paragraph">
 <p>The <code>timetable add</code> command creates a <code>TimeTable</code> entity (possibly with enrollments, year and semester) provided by the user.</p>
 </div>
@@ -673,7 +925,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </ul>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
+<h5 id="current-implementation-12"><a class="link" href="#current-implementation-12">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>TimeTableAddCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>TimeTableAddCommand</code> is parsed using <code>TimeTableAddCommandParser</code> to split the user input into relevant fields.</p>
 </div>
@@ -705,7 +957,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-8"><a class="link" href="#design-considerations-8">Design Considerations</a></h5>
+<h5 id="design-considerations-12"><a class="link" href="#design-considerations-12">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-timetableaddcommand-code-executes"><a class="link" href="#aspect-how-code-timetableaddcommand-code-executes">Aspect: How <code>TimeTableAddCommand</code> Executes</a></h6>
 
@@ -713,7 +965,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="remove-timetable"><a class="link" href="#remove-timetable">3.3.2. Remove TimeTable</a></h4>
+<h4 id="remove-timetable"><a class="link" href="#remove-timetable">3.4.2. Remove TimeTable</a></h4>
 <div class="paragraph">
 <p>The <code>timetable remove</code> command destroys a <code>TimeTable</code> entity (with all associated values) when instructed by the user.</p>
 </div>
@@ -721,7 +973,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 <p>It is appended with the tags <code>year/YEAR</code> and <code>sem/SEM</code>.</p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
+<h5 id="current-implementation-13"><a class="link" href="#current-implementation-13">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>TimeTableRemoveCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>TimeTableRemoveCommand</code> is parsed using <code>TimeTableRemoveCommandParser</code> to parse the action.</p>
 </div>
@@ -743,7 +995,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-9"><a class="link" href="#design-considerations-9">Design Considerations</a></h5>
+<h5 id="design-considerations-13"><a class="link" href="#design-considerations-13">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-timetableremovecommand-code-executes"><a class="link" href="#aspect-how-code-timetableremovecommand-code-executes">Aspect: How <code>TimeTableRemoveCommand</code> Executes</a></h6>
 
@@ -751,7 +1003,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="active-timetable"><a class="link" href="#active-timetable">3.3.3. Active TimeTable</a></h4>
+<h4 id="active-timetable"><a class="link" href="#active-timetable">3.4.3. Active TimeTable</a></h4>
 <div class="paragraph">
 <p>The <code>TimeTable active</code> command selects the specified <code>TimeTable</code> entity with its associated values, by the index input provided by the user.</p>
 </div>
@@ -759,7 +1011,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 <p>It is appended with the tags <code>year/YEAR</code> and <code>sem/SEM</code>.</p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-10"><a class="link" href="#current-implementation-10">Current Implementation</a></h5>
+<h5 id="current-implementation-14"><a class="link" href="#current-implementation-14">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>TimeTableActiveCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>TimeTableActiveCommand</code> is parsed using <code>TimeTableActiveCommandParser</code> to split the user input into relevant fields.</p>
 </div>
@@ -781,7 +1033,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-10"><a class="link" href="#design-considerations-10">Design Considerations</a></h5>
+<h5 id="design-considerations-14"><a class="link" href="#design-considerations-14">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-timetableactivecommand-code-executes"><a class="link" href="#aspect-how-code-timetableactivecommand-code-executes">Aspect: How <code>TimeTableActiveCommand</code> Executes</a></h6>
 
@@ -789,12 +1041,12 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-timetables"><a class="link" href="#list-timetables">3.3.4. List Timetables</a></h4>
+<h4 id="list-timetables"><a class="link" href="#list-timetables">3.4.4. List Timetables</a></h4>
 <div class="paragraph">
 <p>The <code>timetable list</code> command lists all <code>TimeTable</code> entities.</p>
 </div>
 <div class="sect4">
-<h5 id="current-implementation-11"><a class="link" href="#current-implementation-11">Current Implementation</a></h5>
+<h5 id="current-implementation-15"><a class="link" href="#current-implementation-15">Current Implementation</a></h5>
 <div class="paragraph">
 <p><code>TimeTableListCommand</code> extends from the <code>Command</code> class and uses the inheritance to facilitate the implementation. <code>TimeTableListCommand</code> is parsed using <code>TimeTableCommandParser</code> to get the command input.</p>
 </div>
@@ -816,7 +1068,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect4">
-<h5 id="design-considerations-11"><a class="link" href="#design-considerations-11">Design Considerations</a></h5>
+<h5 id="design-considerations-15"><a class="link" href="#design-considerations-15">Design Considerations</a></h5>
 <div class="sect5">
 <h6 id="aspect-how-code-timetablelistcommand-code-executes"><a class="link" href="#aspect-how-code-timetablelistcommand-code-executes">Aspect: How <code>TimeTableListCommand</code> Executes</a></h6>
 
@@ -825,14 +1077,14 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -863,7 +1115,7 @@ When appended with <code>exempted</code> (i.e. <code>module list exempted</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1940,4 +2192,4 @@ Expected: Shows the GUI with a set of sample plans.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-25 13:09:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-03-25 13:26:56 UTC</div></div></div></body></html>
